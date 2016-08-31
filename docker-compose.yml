@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db:
+    image: mysql:latest
+    command: [mysqld, --character-set-server=utf8, --collation-server=utf8_unicode_ci]
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=homestead
+      - MYSQL_USER=homestead
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  node:
+    build:
+      context: .
+      dockerfile: dockerfile-node
+    volumes:
+      - .:/data
+    command: echo node
+  php:
+    build:
+      context: .
+      dockerfile: dockerfile-php
+    links:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/data
+    command: php artisan serve --host=0.0.0.0
