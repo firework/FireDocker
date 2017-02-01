@@ -1,4 +1,0 @@
-FROM alpine:latest
-WORKDIR /data
-RUN apk --update --no-progress add nodejs unrar bash git
-RUN npm install -g gulp

@@ -1,0 +1,29 @@
+version: '2'
+services:
+  app:
+    extends:
+      file: compose.base.yml
+      service: app
+    environment:
+      APP_ENV: ${APP_ENV}
+  nginx:
+    extends:
+      file: compose.base.yml
+      service: nginx
+    ports:
+     - "${APP_PORT}:80"
+  node:
+    extends:
+      file: compose.base.yml
+      service: node
+  mysql:
+    extends:
+        file: compose.base.yml
+        service: mysql
+    ports:
+     - "${DB_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASS}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASS}"

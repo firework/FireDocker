@@ -1,0 +1,19 @@
+version: '2'
+services:
+  app:
+    build: app
+    image: plint/app
+    volumes:
+     - ..:/data
+  nginx:
+    build: nginx
+    image: plint/nginx
+    volumes:
+     - ..:/data
+  node:
+    build: node
+    image: plint/node
+    volumes:
+     - ..:/data
+  mysql:
+    image: mysql:5.7
