@@ -14,4 +14,4 @@ RUN curl https://raw.githubusercontent.com/php/php-src/master/php.ini-developmen
 RUN docker-php-ext-install pdo_mysql pcntl
 
 # Install ffmpeg fonts command dependencies
-RUN apk --update --no-progress add wget unzip
+RUN apk --update --no-progress add wget unzip git
