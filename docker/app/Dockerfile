@@ -7,10 +7,11 @@ RUN deluser www-data \
     && addgroup -g 1000 -S www-data \
     && adduser -u 1000 -D -S -G www-data www-data
 
-# Install PHP Dependencies: PDO MySQL
-RUN docker-php-ext-install pdo_mysql
+# Config PHP
+RUN curl https://raw.githubusercontent.com/php/php-src/master/php.ini-development --output /usr/local/etc/php/php.ini
 
-# Install Composer
-RUN apk --update --no-progress add git \
-    && curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer
+# Install PHP Dependencies: PDO MySQL, pcntl
+RUN docker-php-ext-install pdo_mysql pcntl
+
+# Install ffmpeg fonts command dependencies
+RUN apk --update --no-progress add wget unzip
