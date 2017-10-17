@@ -1,7 +1,5 @@
-FROM node:alpine
+FROM node:latest
 
 WORKDIR /data
 
-# Install YARN
-RUN npm set progress=false \
-    && npm install -g yarn
+RUN apt-get install -y git
